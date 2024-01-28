@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add new student</title>
+
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/999afff8dc.js" crossorigin="anonymous"></script>
+
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <style>
+    .container {
+      width: 50%;
+      min-width: 600px;
+    }
+
+    h4 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    input,
+    textarea,
+    .form-select {
+      border: 1px solid black !important;
+    }
+
+    .btn-outline-dark {
+      border: 2px solid;
+      font-weight: 500;
+      width: 150px;
+      margin: auto;
+      margin-top: 15px;
+    }
+  </style>
+
+  <!------------------------ NAVBAR ---------------------->
+  <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Student System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Students</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-------- MAIN CONTENT ------->
+  <div class="container">
+    <h4 class="mb-3">Add new student</h4>
+
+      <div th:if="${#fields.hasErrors('student.*')}" th:text="${#fields.errors('student.*').get(0)}"
+           class="alert alert-danger alert-dismissible fade show" role="alert">
+      </div>
+
+    <form method="POST" th:action="@{/students}" th:object="${student}">
+      <div class="row g-3">
+        <div class="col-sm-4">
+          <label for="first_name" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="first_name" name="first_name" th:field="*{firstName}" required>
+        </div>
+
+        <div class="col-sm-8">
+          <label for="last_name" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="last_name" name="last_name" th:field="*{lastName}" required>
+        </div>
+
+        <div class="col-12">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" name="email" th:field="*{email}" required>
+        </div>
+        <br>
+        <button class="btn btn-outline-dark" type="submit">Add</button>
+      </div>
+    </form>
+
+  </div>
+
+</body>
+
+</html>
